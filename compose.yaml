@@ -1,0 +1,23 @@
+name: mahjong-quest
+services:
+  gateway:
+    build:
+      context: ./MQGateway
+    ports:
+      - "9000:9000"
+      - "9000:9000/udp"
+    networks:
+      - mahjong-quest-network
+    tty: true
+  authentication:
+    build:
+      context: ./MQAuthentication
+    ports:
+      - "9001:9001"
+      - "9001:9001/udp"
+    networks:
+      - mahjong-quest-network
+    tty: true
+networks:
+  mahjong-quest-network:
+    driver: bridge
