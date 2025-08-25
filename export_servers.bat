@@ -7,8 +7,8 @@ set mq_authentication_path="C:\Users\NathanJones\Desktop\Projects\_complete\Recy
 set mq_gateway_path="C:\Users\NathanJones\Desktop\Projects\_complete\Recycle Bin - Shortcut\Godot\MQGateway"
 
 
-%godot_path% --path %mq_authentication_path% --export-release "MQAuthentication" "dist\MQAuthentication.x86_64"
-%godot_path% --path %mq_gateway_path% --export-release "MQGateway" "dist\MQGateway.x86_64"
+%godot_path% --headless --path %mq_authentication_path% --export-release "MQAuthentication" "dist\MQAuthentication.x86_64"
+%godot_path% --headless --path %mq_gateway_path% --export-release "MQGateway" "dist\MQGateway.x86_64"
 
 cd MQUtils
 
