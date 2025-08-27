@@ -18,6 +18,15 @@ services:
     networks:
       - mahjong-quest-network
     tty: true
+  game:
+    build:
+      context: ../MQGame
+    ports:
+      - "9002:9002"
+      - "9002:9002/udp"
+    networks:
+      - mahjong-quest-network
+    tty: true
 networks:
   mahjong-quest-network:
     driver: bridge
