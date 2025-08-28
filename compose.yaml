@@ -6,6 +6,9 @@ services:
     ports:
       - "9000:9000"
       - "9000:9000/udp"
+    volumes:
+      - ../MQGateway/dist:/dist
+    entrypoint: ["/dist/MQGateway.x86_64", "--headless"]
     networks:
       - mahjong-quest-network
     tty: true
@@ -15,6 +18,11 @@ services:
     ports:
       - "9001:9001"
       - "9001:9001/udp"
+      - "9003:9003"
+      - "9003:9003/udp"
+    volumes:
+      - ../MQAuthentication/dist:/dist
+    entrypoint: ["/dist/MQAuthentication.x86_64", "--headless"]
     networks:
       - mahjong-quest-network
     tty: true
@@ -24,6 +32,9 @@ services:
     ports:
       - "9002:9002"
       - "9002:9002/udp"
+    volumes:
+      - ../MQGame/dist:/dist
+    entrypoint: ["/dist/MQGame.x86_64", "--headless"]
     networks:
       - mahjong-quest-network
     tty: true
