@@ -3,9 +3,13 @@ services:
   gateway:
     build:
       context: ../MQGateway
+    environment:
+      - GATEWAY_PORT=${GATEWAY_PORT}
+      - AUTHENTICATION_PORT=${AUTHENTICATION_PORT}
+      - AUTHENTICATION_URL=${AUTHENTICATION_URL}
     ports:
-      - "9000:9000"
-      - "9000:9000/udp"
+      - "${GATEWAY_PORT}:${GATEWAY_PORT}"
+      - "${GATEWAY_PORT}:${GATEWAY_PORT}/udp"
     volumes:
       - ../MQGateway/dist:/dist
     entrypoint: ["/dist/MQGateway.x86_64", "--headless"]
@@ -15,11 +19,14 @@ services:
   authentication:
     build:
       context: ../MQAuthentication
+    environment:
+      - AUTHENTICATION_PORT=${AUTHENTICATION_PORT}
+      - GAMEHUB_PORT=${GAMEHUB_PORT}
     ports:
-      - "9001:9001"
-      - "9001:9001/udp"
-      - "9003:9003"
-      - "9003:9003/udp"
+      - "${AUTHENTICATION_PORT}:${AUTHENTICATION_PORT}"
+      - "${AUTHENTICATION_PORT}:${AUTHENTICATION_PORT}/udp"
+      - "${GAMEHUB_PORT}:${GAMEHUB_PORT}"
+      - "${GAMEHUB_PORT}:${GAMEHUB_PORT}/udp"
     volumes:
       - ../MQAuthentication/dist:/dist
     entrypoint: ["/dist/MQAuthentication.x86_64", "--headless"]
@@ -29,9 +36,13 @@ services:
   game:
     build:
       context: ../MQGame
+    environment:
+      - GAME_PORT=${GAME_PORT}
+      - GAMEHUB_PORT=${GAMEHUB_PORT}
+      - AUTHENTICATION_URL=${AUTHENTICATION_URL}
     ports:
-      - "9002:9002"
-      - "9002:9002/udp"
+      - "${GAME_PORT}:${GAME_PORT}"
+      - "${GAME_PORT}:${GAME_PORT}/udp"
     volumes:
       - ../MQGame/dist:/dist
     entrypoint: ["/dist/MQGame.x86_64", "--headless"]
